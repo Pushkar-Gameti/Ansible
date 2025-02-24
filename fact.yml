@@ -1,0 +1,7 @@
+---
+- name: Testing Facts
+  hosts: all
+  tasks:
+    - name: Print broadcast address of default IPv4
+      debug: 
+        var: ansible_facts.default_ipv4.broadcast  # System ke network ka broadcast address print karega

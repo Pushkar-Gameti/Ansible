@@ -1,0 +1,26 @@
+---
+- name: We are using array  # Playbook ka naam
+  hosts: all
+  vars_files:
+    - array.yml  # External YAML file se variables load kar raha hai
+
+  tasks:
+    - name: Creating user with array
+      user:
+        name: "{{ custom.development.user }}"  # Development environment ka user create ho raha hai
+        state: present
+
+    - name: Creating group for development with array
+      group:
+        name: "{{ custom.development.group }}"  # Development environment ke user ka group create ho raha hai
+        state: present
+
+    - name: Creating user in production with array
+      user:
+        name: "{{ custom.production.user }}"  # Production environment ka user create ho raha hai
+        state: present
+
+    - name: Creating second group
+      group:
+        name: "{{ custom.production.user }}"  # Yeh galti hai, yahan group ka naam `custom.production.group` hona chahiye
+        state: present

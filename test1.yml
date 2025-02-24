@@ -1,0 +1,8 @@
+---
+- name: Creating a User
+  hosts: all
+  tasks:
+    - name: Create a user named "cell"
+      user:
+        name: cell 
+        state: present  # Yeh user system par create hoga 

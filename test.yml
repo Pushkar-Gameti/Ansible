@@ -1,0 +1,18 @@
+---
+# - name: Creating Users
+#   hosts: all 
+#   tasks:
+#     - name: Creating multiple users from variables
+#       user:
+#         name: "{{ user_1 }}"
+#         state: present
+#
+- name: Creating Users Using External Vault File
+  hosts: all
+  vars_files:
+    - vault.yml  # Yeh file external variables ke liye use ho rahi hai
+  tasks:
+    - name: Creating multiple users
+      user:
+        name: "{{ user_1 }}"  # `vault.yml` se `user_1` variable ki value lega
+        state: present 

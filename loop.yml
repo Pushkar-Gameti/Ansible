@@ -1,0 +1,31 @@
+---
+- name: Testing Loop
+  hosts: all
+  tasks:
+    - name: Creating multiple groups using loop
+      group:
+        name: "{{ item }}"  # Yeh `item` loop se values lega
+        state: present
+      loop: 
+        - group51
+        - group52
+        - group53
+        - group54
+        - group55
+
+    - name: Creating multiple users and assigning them groups
+      user:
+        name: "{{ item.user }}"  # `user` key se username le raha hai
+        groups: "{{ item.group }}"  # `group` key se group assign ho raha hai
+        state: present
+      loop:
+        - user: user61
+          group: group51
+        - user: user62
+          group: group52
+        - user: user63
+          group: group53
+        - user: user64
+          group: group54
+        - user: user65
+          group: group55

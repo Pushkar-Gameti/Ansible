@@ -1,0 +1,9 @@
+---
+custom:  # Custom variables jo manually define kiye gaye hain
+  development:
+    user: garv
+    group: gang
+
+  production:
+    user: aditya
+    group: masti

@@ -1,0 +1,21 @@
+--- 
+ - name: creat multiplay
+   hosts: server1.com
+   tasks:
+     - name: remove httpd 
+       yum:
+         name: httpd
+         state: absent
+
+     - name: delete user
+       user:
+         name: j 
+         state: absent
+ - name: crating  multiplay
+   hosts: server2.com
+   tasks:
+     - name: copy file and cahnge permision
+       copy:
+         src: /root/ansible/devops
+         mode: '666'
+         dest: /mnt/

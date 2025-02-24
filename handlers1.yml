@@ -1,0 +1,19 @@
+---
+- name: Using errors
+  hosts: all
+  become: yes  # Root privileges ke liye
+
+  tasks:
+    - name: Install a non-existing package (ignore errors)
+      yum:
+        name: notapackage  # Intentional mistake for testing
+        state: present
+      ignore_errors: yes
+
+    - name: Create directory /root/test112
+      command: mkdir -p /root/test112
+
+    - name: Create user user333
+      user:
+        name: user333
+        state: present

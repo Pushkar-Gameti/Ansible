@@ -1,0 +1,27 @@
+---
+- name: Using Tags in Ansible
+  hosts: all
+  tasks:
+    - name: Creating a user named "user323"
+      user:
+        name: user323
+        state: present
+      tags:
+        - hello  # Is task ko `hello` tag ke through specific run kar sakte hain
+        - user   # `user` tag bhi assign kiya gaya hai
+
+    - name: Creating a file at /root/tags
+      file:
+        path: /root/tags
+        state: touch  # Agar file exist nahi karti toh create ho jayegi
+      tags:
+        - file  # Is task ko sirf `file` tag ke through run kar sakte hain
+
+    - name: Adding a line to the file
+      lineinfile:
+        path: /root/tags
+        line: "this is for testing"  # File ke andar yeh line add karega
+        create: yes  # Agar file exist nahi karti toh nayi file create karega
+
+    - name: Creating a user using raw command
+      raw: "useradd kaka"  # Direct shell command se user `kaka` create karega

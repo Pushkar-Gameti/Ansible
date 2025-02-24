@@ -1,0 +1,9 @@
+---
+- name: Using Condition
+  hosts: all
+  tasks:
+    - name: Installing Nginx if system has more than 1000MB free RAM
+      yum:
+        name: nginx
+        state: present
+      when: ansible_memfree_mb > 1000  # Agar system ki free memory 1000MB se zyada hai tabhi chalega

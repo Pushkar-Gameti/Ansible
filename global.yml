@@ -1,0 +1,10 @@
+---
+ - name: create user
+   hosts: all 
+#   vars:
+#     - name_1: wget
+   tasks:
+     - name: yum httpd
+       yum:
+         name: "{{ name_1 }}"
+         state: present

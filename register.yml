@@ -1,0 +1,23 @@
+---
+- name: Creating User and Testing Register Variable
+  hosts: all
+  tasks:
+    - name: Create a user and store result in a variable
+      user:
+        name: vikash
+        state: present
+      register: result  # `result` variable me store ho raha hai
+
+    - name: Print the registered variable
+      debug:
+        var: result  # `result` variable ki value ko print karega
+
+    - name: Creating a group and storing result
+      group:
+        name: tier2
+        state: present
+      register: result2  # `result2` me group creation ka result store hoga
+
+    - name: Print the second registered variable
+      debug:
+        var: result2  # `result2` variable print hoga

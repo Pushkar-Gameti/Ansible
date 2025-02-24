@@ -1,0 +1,9 @@
+---
+- name: Using Condition
+  hosts: all
+  tasks:
+    - name: Installing Nginx
+      yum:
+        name: nginx
+        state: present
+      when: ansible_memfree_mb > 1000  # Yeh task sirf tab chalega jab system ki free memory 1000MB se zyada ho

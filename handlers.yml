@@ -1,0 +1,27 @@
+---
+- name: Using Handlers
+  hosts: all
+  force_handlers: yes  # Agar playbook fail bhi ho jaye toh bhi handlers execute honge
+  become: yes  # Root privileges ke liye
+
+  tasks:
+    - name: Create user user224
+      user:
+        name: user224
+        state: present
+      notify: creating group  # Jab yeh task chalega toh "creating group" handler trigger hoga
+
+    - name: Install a non-existing package using YUM
+      yum:
+        name: nope  # Invalid package for testing
+        state: present
+      ignore_errors: yes  # Taaki playbook fail na ho
+
+  handlers:
+    - name: creating group
+      group:
+        name: group301
+        state: present  # User ke saath ek group bhi create hoga
+
+    - name: Create a test file
+      command: "touch /root/file112"  # Yeh handler tabhi chalega jab koi notify kare
