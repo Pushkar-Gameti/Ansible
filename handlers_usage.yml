@@ -1,0 +1,29 @@
+---
+# This playbook demonstrates the use of handlers in Ansible.
+# Handlers are triggered only when notified by a task.
+
+- name: using handlers  # Playbook name
+  hosts: all            # Targeting all hosts
+  force_handlers: yes   # Ensures handlers run even if a failure occurs
+
+  tasks:
+    - name: Create a user  # Task to create a user
+      user:
+        name: user224
+        state: present
+      notify: creating group  # Notifying handler 'creating group'
+
+    - name: Install a package using yum
+      yum:
+        name: nope  # This package likely does not exist; just for demonstration
+        state: present
+
+  handlers:
+    - name: creating group  # Handler that creates a group
+      group:
+        name: group301
+        state: present
+
+    - name: Create a file  # Another handler to create a file
+      command: "touch /root/file112"
+
